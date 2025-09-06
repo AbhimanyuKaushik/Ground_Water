@@ -1,6 +1,7 @@
 // screens/ChatbotScreen.js
 import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
+import { useRouter } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
@@ -118,7 +119,7 @@ const ChatbotScreen = ({ navigation, groundwaterData, currentLocation }) => {
       setLoading(false);
     }
   };
-
+  
   const formatTime = date =>
     date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
@@ -149,21 +150,24 @@ const ChatbotScreen = ({ navigation, groundwaterData, currentLocation }) => {
       </View>
     </View>
   );
-
+  
   const quickActions = [
     'Show current water level',
     'Highest water level in Jaipur',
     'Lowest water level this year',
     'Water stress analysis',
   ];
-
+  
   const handleQuickAction = action => setInputText(action);
+  
+  const router = useRouter();
+
 
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+        <TouchableOpacity onPress={() => router.push('/')} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="#007AFF" />
         </TouchableOpacity>
         <View style={styles.headerContent}>
@@ -212,7 +216,7 @@ const ChatbotScreen = ({ navigation, groundwaterData, currentLocation }) => {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.inputContainer}
-      >
+        >
         <View style={styles.inputWrapper}>
           <TextInput
             style={styles.textInput}
@@ -275,5 +279,4 @@ const styles = StyleSheet.create({
   sendButton: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#007AFF', justifyContent: 'center', alignItems: 'center' },
   sendButtonDisabled: { backgroundColor: '#F3F4F6' },
 });
-
 export default ChatbotScreen;

@@ -415,10 +415,6 @@ export default function DashboardScreen() {
           >
             <Text style={styles.locationButtonText}>📍 Use Current Location</Text>
           </TouchableOpacity>
-
-          <Text style={styles.serviceInfo}>
-            Using hardcoded coordinates and backend for groundwater data
-          </Text>
         </Card.Content>
       </Card>
 
